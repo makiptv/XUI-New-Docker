@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  xui:
+xui:
     image: ghcr.io/x-ui-unofficial/docker
     container_name: xui
         shm_size: '1GB'
