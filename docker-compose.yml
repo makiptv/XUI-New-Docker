@@ -1,9 +1,9 @@
 version: '3.9'
 services:
   xui:
+    image: ghcr.io/x-ui-unofficial/docker
     container_name: xui
-    image: 'ghcr.io/x-ui-unofficial/docker'
-    shm_size: '1GB'
+        shm_size: '1GB'
     privileged: true
     restart: unless-stopped
     ports:
@@ -15,6 +15,8 @@ services:
       - '0.0.0.0:25500:25500'
     ulimits:
      nproc: 65535
-    cap_add:
-     - ALL
-    command: ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisord.conf"]
+    volumes:
+      - $PWD/db/:/etc/x-ui/
+      - $PWD/cert/:/root/cert/
+    restart: unless-stopped
+    network_mode: host
